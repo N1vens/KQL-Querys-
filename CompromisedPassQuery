@@ -1,7 +1,7 @@
 AADSignInEventsBeta
 | where AccountUpn == 'John.Doe@gmail.com' //Account email 
 | where AuthenticationRequirement == "multiFactorAuthentication"
-| where ErrorCode in (50076, 500121, 50079, 53003, 50158 ) //Error codes signifying the actor has the password
+| where ErrorCode in (50076, 500121, 50079, 53003, 50158, 53004 ) //Error codes signifying the actor has the password
 | extend ConditionalAccessStatus = case (
 ConditionalAccessStatus == 0, "Success",
 ConditionalAccessStatus == 1, "Failure",

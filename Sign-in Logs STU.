@@ -1,0 +1,10 @@
+AADSignInEventsBeta
+| where AccountUpn == 'mwall14@my.apsu.edu' //Account Email
+| extend ConditionalAccessStatus = case (
+ConditionalAccessStatus == 0, "Success",
+ConditionalAccessStatus == 1, "Failure",
+ConditionalAccessStatus == 2, "Not Applied",
+ConditionalAccessStatus == 3, "Unknown",
+"Other")                                 //Makes ConditionalAccessStatus more human readable
+| project Timestamp,Application, LogonType, Country,State, City,ConditionalAccessStatus, ErrorCode, AuthenticationRequirement, OSPlatform, IPAddress
+|order by Timestamp
